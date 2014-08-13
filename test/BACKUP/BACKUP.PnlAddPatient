@@ -1,0 +1,214 @@
+package hospital.view;
+
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JButton;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.TitledBorder;
+
+import hospital.controller.HospitalAppController;
+import hospital.model.Patient;
+import hospital.model.Person;
+
+import java.awt.GridLayout;
+
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.factories.FormFactory;
+import com.jgoodies.forms.layout.RowSpec;
+
+import javax.swing.ButtonGroup;
+
+/**
+ * @author XU YINGZHENG
+ */
+
+/*GUI for create new patient and add new patient to patient list*/
+
+public class PnlAddPatient extends JPanel implements ActionListener{
+
+
+
+	private HospitalAppController hospitalController;
+	
+	private ArrayList<Patient> patientModel;
+	
+	private HospitalFrame hospitalFrame;
+	private Container container;
+	
+	private JPanel pnlForm;
+	private JLabel lblAddPatientTxt;    //display "Add New Patient : " in the first line
+	
+	private JLabel lblPatientName;
+	private JLabel lblPatientID;
+	private JLabel lblGender;
+	private JLabel lblBirthday;
+	private JLabel lblAddress;
+	private JLabel lblPhone;
+	
+	private JTextField txtPatientName;
+	private JTextField txtPatientID;
+	
+	//radio button for gender
+	private JRadioButton rdMale;
+	private JRadioButton rdFemale;
+	
+	private JTextField txtBirthday;
+	private JTextField txtAddress;
+	private JTextField txtPhone;
+		
+	private JButton btnAdd;
+	private JButton btnBack;         //go to the start screen (pnlStart) 
+	private final ButtonGroup buttonGroup = new ButtonGroup();
+	
+		
+	public PnlAddPatient(HospitalAppController hospitalController){
+	
+		this.hospitalController = hospitalController;
+		patientModel = new ArrayList<Patient>();
+		
+		lblAddPatientTxt = new JLabel ("Add new patient : ");
+		
+		pnlForm = new JPanel ();
+		pnlForm.setBounds(61, 81, 500, 350);
+		
+		pnlForm.setLayout(new FormLayout(new ColumnSpec[] {
+				FormFactory.LABEL_COMPONENT_GAP_COLSPEC,
+				ColumnSpec.decode("166px"),
+				ColumnSpec.decode("166px"),
+				ColumnSpec.decode("166px"),},
+			new RowSpec[] {
+				FormFactory.NARROW_LINE_GAP_ROWSPEC,
+				RowSpec.decode("58px"),
+				RowSpec.decode("58px"),
+				RowSpec.decode("58px"),
+				RowSpec.decode("58px"),
+				RowSpec.decode("58px"),
+				RowSpec.decode("58px"),}));
+		
+		lblPatientName = new JLabel ("Patient-Name");
+		txtPatientName = new JTextField ();
+		
+		lblPatientID = new JLabel ("Patient-Registration-Number");
+		txtPatientID = new JTextField ();
+		lblGender = new JLabel ("Gender");
+				
+		rdMale = new JRadioButton ("Male");
+		buttonGroup.add(rdMale);
+		rdFemale = new JRadioButton ("Female");
+		buttonGroup.add(rdFemale);
+		
+		lblBirthday = new JLabel ("Date-of-Birth");
+		txtBirthday = new JTextField ();
+		
+		lblAddress = new JLabel ("Address");
+		txtAddress = new JTextField ();
+		
+		lblPhone = new JLabel ("Contact-No");
+		txtPhone = new JTextField ();
+				
+		btnAdd = new JButton ("ADD");
+		btnAdd.setToolTipText("Save new patient details");
+		
+		btnBack = new JButton ("BACK");
+		btnBack.setToolTipText("Go back to Main Screen");
+	
+		setupLayout();
+		setupPanel();
+		setupListener();
+			
+	}
+
+	private void setupLayout() {
+		setLayout(null);
+		
+		lblAddPatientTxt.setBounds(39, 35, 300, 30);
+		btnAdd.setBounds(461, 483, 100, 30);
+		btnBack.setBounds(620, 483, 100, 30);
+		
+		JPanel pnlForm = new JPanel();         //to hold all label and text field of the form
+		pnlForm.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+		BorderFactory.createEtchedBorder(EtchedBorder.LOWERED);
+		pnlForm.setBounds(25, 80, 513, 340);
+		TitledBorder patientFormTitle;
+		patientFormTitle = BorderFactory.createTitledBorder("Add new patient : ");
+		pnlForm.setBorder(patientFormTitle);
+		pnlForm.setVisible(true);
+	
+	}
+	
+	private void setupPanel() {
+		setSize(800,600);
+		setLayout(null);
+		
+		pnlForm.add(lblPatientName, "2, 2, left, fill");
+
+		pnlForm.add(lblGender, "2, 4, left, fill");
+		pnlForm.add(lblPatientID, "2, 3, left, fill");
+		pnlForm.add(lblBirthday, "2, 5, left, fill");
+		pnlForm.add(lblAddress, "2, 6, left, fill");
+		pnlForm.add(lblPhone, "2, 7, left, fill");
+
+		pnlForm.add(txtPatientName, "3, 2, fill, center");
+		pnlForm.add(txtPatientID, "3, 3, fill, center");
+		pnlForm.add(txtBirthday, "3, 5, fill, center");
+		pnlForm.add(txtAddress, "3, 6, fill, center");
+		pnlForm.add(txtPhone, "3, 7, fill, center");
+
+		pnlForm.add(rdMale, "3, 4, center, fill");
+		pnlForm.add(rdFemale, "4, 4, center, fill");
+		
+		add(lblAddPatientTxt);
+		add(btnAdd);
+		add(btnBack);
+		
+		add(pnlForm);
+		setVisible(true);
+	
+	}
+
+	private void setupListeners() {
+		
+		patient.getName = txtPatientName.getText();
+		patient.patID = 
+		
+		.addActionListener(new ActionListener() {
+			
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+		
+			
+		}
+		});
+	}
+
+
+
+
+	private boolean checkInteger (String phoneInput){
+		boolean isInteger = false;
+		try{
+			Integer.parseInt(phoneInput);
+			isInteger = true;
+		}catch(NumberFormatException phoneException){
+			JOptionPane.showMessageDialog(null, this, "Please key in number only for the phone number",JOptionPane.WARNING_MESSAGE);
+		}
+		return isInteger;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+}

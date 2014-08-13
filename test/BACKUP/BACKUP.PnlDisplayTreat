@@ -1,0 +1,125 @@
+/**
+ * 
+ */
+package hospital.view;
+
+import hospital.controller.HospitalAppController;
+import hospital.model.Treatment;
+
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+
+/**
+ * @author XU YINGZHENG
+ *
+ */
+
+public class PnlDisplayTreat extends JPanel implements ActionListener {
+	
+	private static final long serialVersionUID = 1L;
+	
+	private JPanel pnlDisplayTreat;
+	private ArrayList<Treatment> treatData;
+	private Object treatModel;
+	private Container container;
+	
+    private JLabel lblDisplayTreat;
+	
+    //small panel to hold table data
+    
+  	JPanel panelTable = new JPanel();
+    private JTable tblTreat;
+	private JScrollPane sp;
+	
+	private JLabel lblTotal;
+	private JLabel lblNumber;
+	
+	private JButton btnExit;
+	
+	private String [] treatHeader;
+		
+	public PnlDisplayTreat(HospitalAppController hospitalController){
+
+		JPanel pnlDisplayTreat = new JPanel();
+		JLabel lblDisplayTreat = new JLabel ("All Treatment details as shown below :");				
+		JLabel lblTotal = new JLabel("Total Number of Treatments : ");
+		
+		JButton btnExit = new JButton("EXIT");
+	
+		setupTable();
+		setupLayout();
+		setupPanel();
+		setupListener();
+	}
+		
+	private void setupTable(){
+			String [] treatHeader = {"Treat-Number",
+									"Treatment-Name",
+									"Doctor-in-charge",
+									"Room-No"};
+			
+			tblTreat = new JTable(new Object[][] {}, treatHeader);
+			tblTreat.setBounds(10, 10, 480, 230);
+			tblTreat.setPreferredSize(new Dimension(400,300));
+	}
+
+	public void setupLayout(){
+		setLayout(null);
+		setSize(600, 400);
+		panelTable.setBounds(37, 60, 500, 250);
+		lblDisplayTreat.setBounds(37, 30, 300, 10);
+		btnExit.setBounds(457, 340, 80, 25);
+	}
+	
+	public void setupPanel(){
+		
+		//add label and exit button to the panel
+		
+		this.add(lblDisplayTreat);
+		this.add(btnExit);
+		
+		this.add(panelTable);
+		panelTable.setLayout(null);
+		panelTable.add(tblTreat);
+		sp.add(panelTable);
+		
+		lblTotal.setBounds(47, 320, 180, 15);
+		add(lblTotal);
+		
+		//calculate total row number & parse to string to display into label(lblNumber)
+		
+		String number = Integer.toString(tblTreat.getRowCount());
+		JLabel lblNumber = new JLabel (number);
+		lblNumber.setBounds(250, 320, 85, 15);
+		add(lblNumber);
+		
+		setVisible(true);
+	}
+	
+	private void setupListener() {
+		btnExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent exit) {
+				System.exit(0);
+			}
+		});
+	}
+
+	/* (non-Javadoc)
+	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+}
